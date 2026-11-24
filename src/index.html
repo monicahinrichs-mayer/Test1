@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Antrag auf ein neues IuK-Projekt</title>
+  <link rel="stylesheet" href="formular/formular.css">
+  <script type="module">
+    // MOD-formular: die Seite lädt das Formular; Katalog und Erklärungen kommen aus ../docs/ (ARC-001).
+    import { starte } from "./formular/index.mjs";
+    starte(document.querySelector("main"), new URL("../docs/", location.href));
+  </script>
+</head>
+<body>
+  <header>
+    <img class="logo" src="formular/fau-logo.svg" width="160" height="75"
+         alt="Friedrich-Alexander-Universität Erlangen-Nürnberg">
+    <h1>Antrag auf ein neues IuK-Projekt</h1>
+    <p class="hinweis">Antrag an das CIO-Gremium. Ihr Entwurf wird nur in diesem Browser gespeichert: in einem anderen
+      Browser oder auf einem anderen Gerät ist das Formular leer.</p>
+  </header>
+  <main>
+    <p>Das Formular wird geladen …</p>
+  </main>
+</body>
+</html>

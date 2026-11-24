@@ -1,0 +1,277 @@
+/* MOD-formular: der einzige Stil des Formulars (DAS FORMULAR HAT EINEN STIL UND FUNKTIONIERT AUF DEM HANDY).
+   FAU-Blau #04316a als Hauptfarbe (DAS FORMULAR TRÄGT DAS ERSCHEINUNGSBILD DER FAU), Systemschrift, Ziele von mindestens
+   24 × 24 px (WCAG 2.2, 2.5.8), Umfluss bis 320 px Breite (1.4.10), sichtbarer Fokus, kein Zustand allein durch Farbe. */
+
+:root {
+  --fau-blau: #04316a;
+  --text: #1a1a1a;
+  --leise: #4a4a4a;
+  --linie: #8a8a8a;
+  --flaeche: #eef2f7;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text);
+  background: #fff;
+  overflow-wrap: anywhere; /* lange Wörter brechen um, statt seitlich zu ragen (1.4.10) */
+  hyphens: auto;
+}
+
+header,
+main {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+header {
+  border-bottom: 4px solid var(--fau-blau);
+}
+
+.logo {
+  display: block;
+  height: 3.5rem;
+  width: auto;
+  max-width: 100%;
+}
+
+h1,
+h2 {
+  color: var(--fau-blau);
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 1.75rem;
+  margin: 1rem 0 0.5rem;
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.hinweis {
+  color: var(--leise);
+}
+
+/* Abschnitte und Fragen */
+fieldset {
+  min-width: 0; /* sonst ist ein fieldset nie schmaler als sein Inhalt */
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+legend {
+  padding: 0;
+  max-width: 100%;
+  white-space: normal;
+}
+
+.abschnitt {
+  margin: 2rem 0 0;
+}
+
+.abschnitt > legend {
+  width: 100%;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--fau-blau);
+}
+
+.frage {
+  margin: 1.25rem 0 0;
+  padding: 0 0 1rem;
+  border-bottom: 1px solid #d0d7e1;
+}
+
+.frage-titel {
+  display: block;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.nr {
+  color: var(--fau-blau);
+}
+
+.pflicht {
+  color: var(--fau-blau);
+  font-weight: 700;
+}
+
+textarea,
+input[type="date"] {
+  display: block;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.5rem;
+  font: inherit;
+  color: inherit;
+  background: #fff;
+  border: 1px solid var(--linie);
+  border-radius: 4px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type="date"] {
+  max-width: 14rem;
+}
+
+.moeglichkeit {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  flex: none;
+  width: 1.5rem; /* 24 px */
+  height: 1.5rem;
+  margin: 0;
+  accent-color: var(--fau-blau);
+}
+
+.moeglichkeit label {
+  min-height: 1.5rem;
+  padding: 0.25rem 0;
+}
+
+/* Erklärung: eingeklappt, mit der Tastatur erreichbar */
+.erklaerung {
+  margin-top: 0.5rem;
+}
+
+.erklaerung summary {
+  display: list-item;
+  min-height: 1.5rem;
+  padding: 0.25rem 0;
+  color: var(--fau-blau);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.erklaerung p {
+  margin: 0.5rem 0 0;
+  padding: 0.75rem;
+  background: var(--flaeche);
+  border-left: 4px solid var(--fau-blau);
+}
+
+/* Aktionen */
+.aktionen {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 4px solid var(--fau-blau);
+}
+
+.knoepfe {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+button {
+  min-height: 2.75rem;
+  min-width: 1.5rem;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: var(--fau-blau);
+  border: 2px solid var(--fau-blau);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0a4a99;
+}
+
+#entwurf-loeschen {
+  color: var(--fau-blau);
+  background: #fff;
+}
+
+#empfaenger {
+  font-weight: 600;
+}
+
+.kopierbar {
+  font-weight: 600;
+  color: var(--text);
+  user-select: all;
+}
+
+#fehlend:not(:empty) {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border: 3px solid var(--fau-blau);
+  border-left-width: 8px;
+}
+
+#fehlend ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+}
+
+#fehlend a {
+  display: inline-block;
+  min-height: 1.5rem;
+  padding: 0.125rem 0;
+}
+
+a {
+  color: var(--fau-blau);
+}
+
+/* Sichtbarer Fokus für jedes Bedienelement */
+:focus-visible {
+  outline: 3px solid var(--fau-blau);
+  outline-offset: 2px;
+}
+
+textarea:focus-visible,
+input:focus-visible {
+  outline-offset: 1px;
+}
+
+/* Nur für Screenreader */
+.nur-vorgelesen {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
