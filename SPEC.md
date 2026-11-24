@@ -45,6 +45,38 @@ nimmt Freitext an; eine Frage mit Datum nimmt ein Datum an.
 Jede Frage trägt eine aufklappbare Erklärung, geschrieben für jemanden, der zum ersten Mal einen IuK-Antrag stellt.
 *Check:* `tests/fragen.test.mjs` — jede Frage hat eine eingeklappte, nicht leere Erklärung.
 
+### Pflichtfelder und Prüfung
+
+**PFLICHTFELDER** *(github.com/monicahinrichs-mayer)*
+Jede Frage des Formulars ist eine Pflichtfrage, außer P5 und P6; V2, V4 und C5 sind Pflichtfragen nur, solange V1,
+V3 beziehungsweise C4 mit „Ja“ beantwortet ist. [→ docs/antragsfragen.md]
+*Check:* `tests/pruefung.test.mjs` — die Pflicht jeder Frage gleicht der Spalte *Pflicht* der Tabelle, für V2, V4 und
+C5 je mit „Ja“, „Nein“ und ohne Antwort auf ihre auslösende Frage.
+
+**EINE PFLICHTFRAGE IST BEANTWORTET, WENN IHRE ANTWORT GÜLTIG IST** *(github.com/monicahinrichs-mayer)*
+Eine Pflichtfrage mit Text ist beantwortet, wenn ihre Antwort ein Zeichen außer Leerraum enthält; eine mit Datum,
+wenn sie ein gültiges Kalenderdatum enthält; eine mit Auswahl, wenn eine ihrer Möglichkeiten gewählt ist.
+*Check:* `tests/pruefung.test.mjs` — je Antwortart eine gültige und eine ungültige Antwort, darunter nur Leerzeichen und
+ein Datum 31.02.
+
+**JEDE PFLICHTFRAGE IST GEKENNZEICHNET** *(github.com/monicahinrichs-mayer)*
+Jede Pflichtfrage ist im Formular sichtbar und für einen Screenreader als Pflicht gekennzeichnet, nicht allein durch
+Farbe.
+*Check:* `tests/pruefung.test.mjs` — jedes Feld einer Pflichtfrage trägt `aria-required="true"` und einen sichtbaren
+Hinweis in Text oder Zeichen; Gegenprobe: ein Feld, das nur durch Farbe gekennzeichnet ist, schlägt fehl.
+
+**EINREICHEN SETZT EINEN VOLLSTÄNDIGEN ANTRAG VORAUS** *(github.com/monicahinrichs-mayer)*
+Solange eine Pflichtfrage unbeantwortet ist, speichert *Einreichen* keine Datei und öffnet kein Mailprogramm; das
+Formular nennt jede unbeantwortete Pflichtfrage und setzt den Eingabefokus in die erste.
+*Check:* `tests/einreichen.test.mjs` — mit einer unbeantworteten Pflichtfrage entsteht keine Datei und keine
+`mailto:`-Adresse, die Liste nennt genau die unbeantworteten Pflichtfragen, und der Fokus liegt in der ersten.
+
+**EIN UNVOLLSTÄNDIGER EXPORT IST ALS ENTWURF GEKENNZEICHNET** *(github.com/monicahinrichs-mayer)*
+Ein Export, während eine Pflichtfrage unbeantwortet ist, trägt am Anfang des Dokuments den Vermerk „Entwurf –
+unvollständig“; ein Export eines vollständigen Antrags trägt ihn nicht.
+*Check:* `tests/export.test.mjs` — Word und PDF eines unvollständigen Antrags beginnen mit dem Vermerk; Gegenprobe: die
+eines vollständigen enthalten ihn nicht.
+
 ### Erscheinungsbild und Bedienung
 
 **DAS FORMULAR TRÄGT DAS ERSCHEINUNGSBILD DER FAU** *(github.com/monicahinrichs-mayer)*
@@ -115,10 +147,11 @@ oder als unbeantwortet gekennzeichnet.
 ### Einreichen
 
 **DER ANTRAG WIRD ÜBER DAS MAILPROGRAMM EINGEREICHT** *(github.com/monicahinrichs-mayer)*
-Ein Bedienelement öffnet das Mailprogramm mit dem Empfänger `cio-office@fau.de`, dem Betreff „Antrag neues
-IuK-Projekt“ und einem Text, der bittet, den exportierten Antrag anzuhängen.
-*Check:* `tests/einreichen.test.mjs` — die geöffnete `mailto:`-Adresse nennt genau Empfänger, Betreff und Text und keine
-Eingabe des Formulars.
+Ein Bedienelement speichert den Antrag als Word-Dokument und öffnet danach das Mailprogramm mit dem Empfänger
+`cio-office@fau.de`, dem Betreff „Antrag neues IuK-Projekt“ und einem Text, der bittet, das eben gespeicherte
+Word-Dokument anzuhängen.
+*Check:* `tests/einreichen.test.mjs` — ein Klick auf einen vollständigen Antrag ergibt zuerst eine Datei `.docx`, dann
+eine `mailto:`-Adresse, die genau Empfänger, Betreff und Text nennt und keine Eingabe des Formulars.
 
 **DAS FORMULAR NENNT, WOHIN ES SENDET** *(github.com/monicahinrichs-mayer)*
 Bevor das Mailprogramm geöffnet wird, nennt das Formular den Empfänger `cio-office@fau.de`.
