@@ -1,0 +1,1 @@
+{"format":"agent-m-trace-gaps","version":1,"commit":"2e41b1609b7438995415a814f42414413d5ff5cb","gaps":{"requirementsWithoutUseCase":["KEIN GEHEIMNIS IM REPOSITORY"],"requirementsWithoutModule":["KEIN GEHEIMNIS IM REPOSITORY"],"requirementsWithoutTest":[],"useCasesWithoutRequirement":[],"unknownNames":[]}}
