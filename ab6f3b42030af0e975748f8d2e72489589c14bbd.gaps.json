@@ -1,0 +1,1 @@
+{"format":"agent-m-trace-gaps","version":1,"commit":"ab6f3b42030af0e975748f8d2e72489589c14bbd","gaps":{"requirementsWithoutUseCase":[],"requirementsWithoutModule":[],"requirementsWithoutTest":[],"useCasesWithoutRequirement":[],"unknownNames":[]}}
