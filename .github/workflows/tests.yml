@@ -1,0 +1,22 @@
+# Die Tests aus tests/ (SPEC: jede Anforderung, deren Check einen Test nennt) bei jedem Push und Pull Request.
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Noch keine package-lock.json im Repository: npm install löst die exakt gepinnten Versionen auf.
+      - run: npm install --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm test

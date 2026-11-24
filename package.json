@@ -1,0 +1,19 @@
+{
+  "name": "iuk-antrag",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Antrag auf ein neues IuK-Projekt an das CIO-Gremium der FAU — statisches Formular im Browser",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "jszip": "3.10.1",
+    "pdfjs-dist": "4.10.38",
+    "playwright": "1.64.1"
+  }
+}
