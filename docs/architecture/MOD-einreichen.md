@@ -15,6 +15,7 @@ uses:
   - MOD-export.speichere
 provides:
   - EMPFAENGER
+  - BETREFF
   - MAILTO
   - reicheEin
 ---
@@ -28,6 +29,8 @@ Die `mailto:`-Adresse ist eine Konstante; keine Antwort gelangt hinein.
 ## Schnittstellen
 
 - `EMPFAENGER = "cio-office@fau.de"` — auch der Text, den MOD-formular am Bedienelement zeigt.
+- `BETREFF = "Antrag neues IuK-Projekt"` — auch der Betreff, den MOD-formular zum Kopieren zeigt, falls sich kein
+  Mailprogramm öffnet.
 - `MAILTO` — `mailto:cio-office@fau.de` mit dem Betreff „Antrag neues IuK-Projekt“ und einem Text, der bittet, das eben
   gespeicherte Word-Dokument anzuhängen.
 - `reicheEin(abschnitte, antworten, oeffne) -> Promise<{ fehlend: Frage[] }>` — ist `fehlendePflichtfragen` nicht leer,

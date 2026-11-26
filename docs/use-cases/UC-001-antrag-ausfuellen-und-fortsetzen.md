@@ -8,6 +8,7 @@ actors:
 realises:
   - KEIN SERVER
   - DAS FORMULAR STELLT JEDE FRAGE DES ANTRAGS
+  - DAS FORMULAR TRÄGT DEN TITEL DES ANTRAGS
   - JEDE FRAGE HAT IHRE ANTWORTART
   - JEDE FRAGE ERKLÄRT SICH
   - PFLICHTFELDER
@@ -17,6 +18,10 @@ realises:
   - DAS FORMULAR DIENT EINEM SCREENREADER
   - DAS FORMULAR ÖFFNET MIT DEM ERSTEN FELD IM FOKUS
   - DAS FORMULAR LÄDT IN UNTER DREI SEKUNDEN
+  - DAS FORMULAR IST AUF FÜNF LASCHEN VERTEILT
+  - EINE LASCHE WECHSELT OHNE VERLUST
+  - DIE FORTSCHRITTSLEISTE ZEIGT DEN ANTEIL DER BEANTWORTETEN PFLICHTFRAGEN
+  - JEDE LASCHE ZEIGT, OB SIE VOLLSTÄNDIG IST
   - EINGABEN BLEIBEN IM BROWSER ERHALTEN
   - DER ZWISCHENSTAND LIEGT IM LOCALSTORAGE
   - LÖSCHEN LÖSCHT WIRKLICH
@@ -39,15 +44,22 @@ wie nötig, ohne dass ein Entwurf ihren Browser verlässt.
 
 ## Hauptablauf
 
-1. Die Person öffnet die Seite des Formulars. Sie lädt in unter drei Sekunden, trägt FAU-Blau und das Logo der FAU,
-   und der Eingabefokus liegt im ersten Feld (K1 Datum).
-2. Das Formular zeigt jede Frage des Antrags in ihrer Reihenfolge, unter ihrem Abschnitt, mit ihrer Antwortart: ein
-   Textfeld, ein Datumsfeld oder eine Auswahl ihrer Möglichkeiten. Neben jeder Frage steht eine eingeklappte Erklärung;
-   jede Pflichtfrage ist als solche gekennzeichnet, sichtbar und für einen Screenreader. Beantwortet die Person V1, V3
-   oder C4 mit „Ja“, wird die zugehörige Folgefrage V2, V4 beziehungsweise C5 zur Pflichtfrage.
-3. Die Person beantwortet Fragen. Bei Bedarf klappt sie die Erklärung einer Frage auf.
+1. Die Person öffnet die Seite des Formulars. Sie lädt in unter drei Sekunden, trägt FAU-Blau, das Logo der FAU und
+   den Titel „Antrag gem. §5 Abs. 4 CIO-Ordnung an das CIO-Gremium zur Einführung/Einstellung eines IuK-Projekts“. Sie
+   zeigt die erste von fünf Laschen, *Allgemeines*, und der Eingabefokus liegt im ersten Feld (K1, Einführung oder
+   Einstellung).
+2. Über den Reitern der Laschen *Allgemeines*, *Projekt*, *Recht und Sicherheit*, *Nutzung und Betrieb* und *Kosten*
+   steht eine Fortschrittsleiste mit dem Anteil der beantworteten Pflichtfragen in Prozent. Die gezeigte Lasche stellt
+   jede ihrer Fragen in ihrer Reihenfolge, unter ihrem Abschnitt, mit ihrer Antwortart: ein Textfeld oder eine Auswahl
+   ihrer Möglichkeiten; nach einem Datum fragt das Formular nicht. Neben jeder Frage steht eine eingeklappte
+   Erklärung; jede Pflichtfrage ist als solche gekennzeichnet, sichtbar und für einen Screenreader. Beantwortet die
+   Person V1, V3 oder C4 mit „Ja“, wird die zugehörige Folgefrage V2, V4 beziehungsweise C5 zur Pflichtfrage.
+3. Die Person beantwortet die Fragen der Lasche. Bei Bedarf klappt sie die Erklärung einer Frage auf. Am Ende der
+   Lasche wählt sie *Weiter* und beantwortet die Fragen der nächsten Lasche, bis zur letzten.
 4. Jede Eingabe wird sofort im `localStorage` des Browsers gespeichert; das Formular sendet nichts an einen Server
-   und setzt kein Cookie. Ein Hinweis am Formular sagt, dass der Entwurf nur in diesem Browser liegt.
+   und setzt kein Cookie. Ein Hinweis am Formular sagt, dass der Entwurf nur in diesem Browser liegt. Die
+   Fortschrittsleiste folgt jeder Eingabe; sind alle Pflichtfragen einer Lasche beantwortet, trägt ihr Reiter ein
+   Häkchen und für einen Screenreader den Text „vollständig“. Bei 100 % ist der Antrag einreichbar (UC-003).
 5. Die Person schließt die Seite.
 6. Später öffnet sie die Seite im selben Browser wieder. Alle Eingaben stehen in den Feldern, wie sie sie verlassen
    hat, und sie setzt bei Schritt 3 fort.
@@ -59,6 +71,9 @@ wie nötig, ohne dass ein Entwurf ihren Browser verlässt.
 - **3b. Die Person füllt den Antrag auf dem Handy aus.** Das Formular fließt auf die Breite des Bildschirms um;
   nichts muss seitlich gescrollt werden.
 - **3c. Die Person ändert bei einer Auswahl ihre Wahl.** Die neue Möglichkeit ersetzt die alte; nie sind zwei gewählt.
+- **3d. Die Person springt zu einer anderen Lasche.** Sie klickt auf deren Reiter oder bewegt sich mit den Pfeiltasten
+  über die Reiter. Das Formular zeigt diese Lasche; jede Antwort, auch auf den anderen Laschen, bleibt, wie sie war.
+  Exportieren, Einreichen und *Entwurf löschen* stehen unter jeder Lasche.
 - **6a. Die Person öffnet die Seite in einem anderen Browser oder auf einem anderen Gerät.** Das Formular ist leer:
   der Entwurf liegt nur im Browser, in dem er entstand. Ein Hinweis am Formular sagt das.
 - **5a. Die Person verwirft den Entwurf, statt die Seite zu schließen.** Sie wählt *Entwurf löschen*; das Formular fragt einmal nach. Bestätigt sie,

@@ -10,8 +10,11 @@ realises:
   - DER ANTRAG WIRD ALS WORD-DOKUMENT EXPORTIERT
   - DER ANTRAG WIRD ALS PDF EXPORTIERT
   - DER EXPORT ENTHÄLT JEDE FRAGE MIT IHRER ANTWORT
+  - DAS FORMULAR TRÄGT DEN TITEL DES ANTRAGS
+  - DAS DATUM DER ANTRAGSTELLUNG IST DER TAG DES EXPORTS
   - EIN UNVOLLSTÄNDIGER EXPORT IST ALS ENTWURF GEKENNZEICHNET
   - EIN KLICK PRO ENTSCHEIDUNG
+  - EXPORTIEREN UND EINREICHEN STEHEN UNTER JEDER LASCHE
   - KEINE ANTWORT STEHT IN EINER ADRESSE
 ---
 # UC-002 Antrag als Word oder PDF exportieren
@@ -29,9 +32,10 @@ realises:
 
 ## Hauptablauf
 
-1. Die Person wählt *Als Word exportieren*.
+1. Die Person wählt *Als Word exportieren*, gleich unter welcher Lasche.
 2. Der Browser erzeugt aus dem aktuellen Stand eine Datei `.docx`, ohne etwas an einen Server zu senden, und speichert
-   sie. Ein Klick genügt.
+   sie. Ein Klick genügt. Die Datei beginnt mit dem Titel „Antrag gem. §5 Abs. 4 CIO-Ordnung an das CIO-Gremium zur
+   Einführung/Einstellung eines IuK-Projekts“ und nennt darunter „Datum der Antragstellung“ mit dem heutigen Tag.
 3. Die Datei enthält jede Frage des Formulars in dessen Reihenfolge und unter ihrem Abschnitt, jeweils mit der
    gegebenen Antwort; bei einer Auswahl die gewählte Möglichkeit.
 

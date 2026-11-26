@@ -5,6 +5,7 @@ forced_by:
   - KEIN SERVER
   - KEIN GEHEIMNIS IM REPOSITORY
   - DAS FORMULAR STELLT JEDE FRAGE DES ANTRAGS
+  - DAS FORMULAR TRÄGT DEN TITEL DES ANTRAGS
   - JEDE FRAGE HAT IHRE ANTWORTART
   - JEDE FRAGE ERKLÄRT SICH
   - PFLICHTFELDER
@@ -18,6 +19,11 @@ forced_by:
   - DAS FORMULAR ÖFFNET MIT DEM ERSTEN FELD IM FOKUS
   - EIN KLICK PRO ENTSCHEIDUNG
   - DAS FORMULAR LÄDT IN UNTER DREI SEKUNDEN
+  - DAS FORMULAR IST AUF FÜNF LASCHEN VERTEILT
+  - EINE LASCHE WECHSELT OHNE VERLUST
+  - EXPORTIEREN UND EINREICHEN STEHEN UNTER JEDER LASCHE
+  - DIE FORTSCHRITTSLEISTE ZEIGT DEN ANTEIL DER BEANTWORTETEN PFLICHTFRAGEN
+  - JEDE LASCHE ZEIGT, OB SIE VOLLSTÄNDIG IST
   - EINGABEN BLEIBEN IM BROWSER ERHALTEN
   - DER ZWISCHENSTAND LIEGT IM LOCALSTORAGE
   - LÖSCHEN LÖSCHT WIRKLICH
@@ -25,6 +31,7 @@ forced_by:
   - DER ANTRAG WIRD ALS WORD-DOKUMENT EXPORTIERT
   - DER ANTRAG WIRD ALS PDF EXPORTIERT
   - DER EXPORT ENTHÄLT JEDE FRAGE MIT IHRER ANTWORT
+  - DAS DATUM DER ANTRAGSTELLUNG IST DER TAG DES EXPORTS
   - DER ANTRAG WIRD ÜBER DAS MAILPROGRAMM EINGEREICHT
   - DAS FORMULAR NENNT, WOHIN ES SENDET
   - UC-001
@@ -55,7 +62,8 @@ einem Stylesheet und zwei mitgelieferten Bibliotheken. Der Browser lädt alles v
 Server-Code, keinen Build und keine Anfrage an einen fremden Ursprung (`KEIN SERVER`).
 
 **Der Fragenkatalog ist Daten.** Die Fragen, ihre Antwortarten und ihre Pflicht stehen einmal, in
-`docs/antragsfragen.md`; die Erklärungen zu den Fragen einmal, in `docs/erklaerungen.md`. Die Seite liest beide Dateien
+`docs/antragsfragen.md`, ebenso die Verteilung ihrer Abschnitte auf die fünf Laschen (je Lasche eine Überschrift
+`# Lasche: …`); die Erklärungen zu den Fragen einmal, in `docs/erklaerungen.md`. Die Seite liest beide Dateien
 beim Laden und baut das Formular daraus. Kein Programmteil wiederholt eine Frage (*Nichts doppelt*): eine geänderte
 Fassung des Antrags ist eine geänderte Tabelle, kein geänderter Code.
 
@@ -63,8 +71,8 @@ Fassung des Antrags ist eine geänderte Tabelle, kein geänderter Code.
 
 | Modul | Ordner | Verantwortung |
 |---|---|---|
-| MOD-fragenkatalog | `src/fragenkatalog/` | liest die Tabellen der Fragen und der Erklärungen und liefert Abschnitte und Fragen |
-| MOD-pruefung | `src/pruefung/` | sagt, welche Fragen gerade Pflicht sind und welche davon unbeantwortet |
+| MOD-fragenkatalog | `src/fragenkatalog/` | liest die Tabellen der Fragen und der Erklärungen und liefert Laschen, Abschnitte und Fragen |
+| MOD-pruefung | `src/pruefung/` | sagt, welche Fragen gerade Pflicht sind, welche davon unbeantwortet und wie viel Prozent beantwortet |
 | MOD-zwischenstand | `src/zwischenstand/` | liest, schreibt und löscht die Antworten in `localStorage` |
 | MOD-export | `src/export/` | erzeugt aus Katalog und Antworten ein Word-Dokument oder ein PDF |
 | MOD-einreichen | `src/einreichen/` | prüft, speichert das Word-Dokument und öffnet das Mailprogramm |
@@ -97,18 +105,26 @@ MOD-zwischenstand und MOD-export sind ohne Seite testbar (*Design to test*).
 
 ### Zusammenspiel
 
-- **Laden (UC-001 1–2).** `src/index.html` lädt MOD-formular. Es liest über MOD-fragenkatalog die beiden Tabellen,
-  über MOD-zwischenstand die gespeicherten Antworten, zeichnet jeden Abschnitt als Überschrift und jede Frage als Feld
-  ihrer Antwortart, mit eingeklappter Erklärung (`<details>`), Pflichtkennzeichen (`*` und `aria-required`) und Antwort,
-  und setzt den Fokus in das erste Feld.
+- **Laden (UC-001 1–2).** `src/index.html` lädt MOD-formular. Es setzt den Titel des Antrags aus MOD-export als
+  Hauptüberschrift, liest über MOD-fragenkatalog die beiden Tabellen, über MOD-zwischenstand die gespeicherten
+  Antworten, zeichnet die Fortschrittsleiste, die Reiter der fünf Laschen und je Lasche ein Feld ihrer Abschnitte —
+  jeden Abschnitt als Überschrift, jede Frage als Feld ihrer Antwortart, mit eingeklappter Erklärung (`<details>`),
+  Pflichtkennzeichen (`*` und `aria-required`) und Antwort —, zeigt die erste Lasche und setzt den Fokus in ihr erstes
+  Feld. Die übrigen Laschen sind gezeichnet, aber verborgen (`hidden`).
 - **Eingabe (UC-001 3–4).** Jede Änderung eines Feldes schreibt die Antworten über MOD-zwischenstand. Eine Antwort auf
-  V1, V3 oder C4 lässt MOD-formular über MOD-pruefung die Pflicht der Folgefrage neu kennzeichnen.
+  V1, V3 oder C4 lässt MOD-formular über MOD-pruefung die Pflicht der Folgefrage neu kennzeichnen. Nach jeder Änderung
+  fragt MOD-formular MOD-pruefung nach dem Fortschritt des ganzen Antrags und jeder Lasche und setzt Leiste und Häkchen.
+- **Laschen (UC-001 3d).** Die Reiter folgen dem Muster *Tabs* der WAI-ARIA Authoring Practices: `role="tablist"`,
+  je Reiter `role="tab"` mit `aria-selected` und `aria-controls`, je Lasche `role="tabpanel"`; Pfeiltasten, `Pos1` und
+  `Ende` wechseln den Reiter. Ein Wechsel verbirgt und zeigt nur; die Felder und ihre Werte bleiben im DOM.
 - **Löschen (UC-001 5a).** Nach `confirm` entfernt MOD-zwischenstand den einen Schlüssel des Formulars, und MOD-formular
   leert jedes Feld.
 - **Export (UC-002).** MOD-export baut aus Katalog und Antworten das Dokument; ist laut MOD-pruefung eine Pflichtfrage
-  unbeantwortet, beginnt es mit „Entwurf – unvollständig“. Der Browser speichert die Datei über einen `Blob`-Download.
+  unbeantwortet, steht unter dem Titel „Entwurf – unvollständig“; darunter das Datum der Antragstellung, der Tag des
+  Exports. Der Browser speichert die Datei über einen `Blob`-Download.
 - **Einreichen (UC-003).** MOD-einreichen fragt MOD-pruefung nach unbeantworteten Pflichtfragen. Sind es welche, gibt es
-  sie an MOD-formular, das sie nennt und die erste fokussiert. Sonst speichert es das Word-Dokument über MOD-export und
+  sie an MOD-formular, das sie nennt, die Lasche der ersten zeigt und sie fokussiert. Sonst speichert es das
+  Word-Dokument über MOD-export und
   setzt danach `location.href` auf `mailto:cio-office@fau.de` mit festem Betreff und festem Text.
 
 ### Strategie
@@ -143,7 +159,10 @@ MOD-zwischenstand und MOD-export sind ohne Seite testbar (*Design to test*).
 
 ## Konsequenzen
 
-- Eine neue Fassung des Antrags ändert `docs/antragsfragen.md` und `docs/erklaerungen.md`, aber keinen Code.
+- Eine neue Fassung des Antrags ändert `docs/antragsfragen.md` und `docs/erklaerungen.md`, aber keinen Code; ebenso eine
+  andere Verteilung der Abschnitte auf Laschen.
+- Seit dem Wegfall der Datumsfragen heißen die bisherigen K2 und K3 nun K1 und K2. Ein Entwurf aus der Zeit davor trägt
+  seine Antworten unter den alten Nummern; er stammt nur aus Tests und wird mit *Entwurf löschen* verworfen.
 - `docs/erklaerungen.md` entsteht neu: je Frage eine Erklärung für jemanden, der zum ersten Mal einen IuK-Antrag stellt;
   sie wird wie jedes Dokument geprüft.
 - Das Logo der FAU muss als Datei bereitgestellt werden, aus den Vorlagen des Corporate Designs der FAU.
