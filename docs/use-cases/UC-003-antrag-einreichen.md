@@ -13,6 +13,7 @@ realises:
   - EINE PFLICHTFRAGE IST BEANTWORTET, WENN IHRE ANTWORT GÜLTIG IST
   - EINREICHEN SETZT EINEN VOLLSTÄNDIGEN ANTRAG VORAUS
   - DER ANTRAG WIRD ÜBER DAS MAILPROGRAMM EINGEREICHT
+  - NACH DEM EINREICHEN STEHT EINE CHECKLISTE DER ANHÄNGE
   - DAS FORMULAR NENNT, WOHIN ES SENDET
   - EIN KLICK PRO ENTSCHEIDUNG
   - EXPORTIEREN UND EINREICHEN STEHEN UNTER JEDER LASCHE
@@ -43,9 +44,14 @@ Klick im Formular und ohne dass das Formular einen Server braucht.
    eine gewählte Möglichkeit. Jede Pflichtfrage ist beantwortet.
 4. Der Browser speichert den Antrag als Word-Dokument im Download-Ordner, ohne etwas an einen Server zu senden.
 5. Danach öffnet das Mailprogramm eine neue Mail an `cio-office@fau.de` mit dem Betreff „Antrag neues IuK-Projekt“ und
-   einem Text, der bittet, das eben gespeicherte Word-Dokument anzuhängen. Die Adresse, die das Formular dafür öffnet,
-   enthält keine Antwort des Formulars.
-6. Die Person hängt das Word-Dokument an, ergänzt die Mail nach Belieben und sendet sie aus ihrem Mailprogramm.
+   einem Text, der bittet, das eben gespeicherte Word-Dokument und die Beilagen der Checkliste anzuhängen. Die Adresse,
+   die das Formular dafür öffnet, enthält keine Antwort des Formulars.
+6. Das Formular zeigt eine Checkliste dessen, was an die Mail gehört: zuerst das Word-Dokument mit seinem Dateinamen,
+   dann jede Beilage, die die Person angekündigt hat — die Skizze der Kommunikationsbeziehungen (P5) und die Unterlagen
+   des Anbieters (P6), wenn angekreuzt; die Stellungnahme des Datenschutzbeauftragten (D3) und die der Personal- bzw.
+   Schwerbehindertenvertretung (R3), wenn „Ja, ist beigelegt“ gewählt ist. Jeder Eintrag hat ein Kästchen zum Abhaken.
+7. Die Person hängt das Word-Dokument und die Beilagen an, hakt sie in der Liste ab, ergänzt die Mail nach Belieben und
+   sendet sie aus ihrem Mailprogramm.
 
 ## Alternative Abläufe
 

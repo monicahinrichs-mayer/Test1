@@ -37,7 +37,7 @@ Antrags, den auch die Seite trägt.
 
 ## Schnittstellen
 
-- `TITEL = "Antrag gem. §5 Abs. 4 CIO-Ordnung an das CIO-Gremium zur Einführung/Einstellung eines IuK-Projekts"` —
+- `TITEL = "Antrag gem. §5 Abs. 4 CIO-Ordnung an das CIO-Gremium zur Einführung eines IuK-Projekts"` —
   auch die Hauptüberschrift der Seite (MOD-formular).
 - `zeilen(abschnitte, antworten, heute: Date = new Date()) -> Zeile[]` — ohne Bibliothek, für Tests; der Vermerk steht
   genau dann an zweiter Stelle, wenn `fehlendePflichtfragen` nicht leer ist; danach die Zeile `datum` mit

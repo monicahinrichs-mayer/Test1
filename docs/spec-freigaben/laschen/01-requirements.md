@@ -16,15 +16,15 @@ eine eingeschleuste Datei mit `github_pat_…` schlägt fehl.
 ### Formular
 
 **DAS FORMULAR STELLT JEDE FRAGE DES ANTRAGS** *(github.com/monicahinrichs-mayer)*
-Das Formular stellt jede Frage des Antrags auf ein neues IuK-Projekt, Fassung v4, außer den Fragen nach dem Datum, in
-deren Reihenfolge und unter deren Abschnitt; der erste Abschnitt heißt „Allgemeine Informationen“.
+Das Formular stellt jede Frage des Antrags auf ein neues IuK-Projekt, Fassung v4, in deren Reihenfolge und unter deren
+Abschnitt, außer den Fragen nach dem Datum, nach Einführung oder Einstellung und nach der Bezeichnung des IuK-Projekts.
 [→ docs/antragsfragen.md]
 *Check:* `tests/fragen.test.mjs` — jede Frage aus `docs/antragsfragen.md` steht im Formular, in derselben Reihenfolge
-und unter ihrem Abschnitt, und keine Frage hat die Antwortart Datum.
+und unter ihrem Abschnitt; keine Frage hat die Antwortart Datum, und keine fragt nach Einführung oder Einstellung.
 
 **DAS FORMULAR TRÄGT DEN TITEL DES ANTRAGS** *(github.com/monicahinrichs-mayer)*
 Die Seite des Formulars und jedes exportierte Dokument tragen den Titel „Antrag gem. §5 Abs. 4 CIO-Ordnung an das
-CIO-Gremium zur Einführung/Einstellung eines IuK-Projekts“.
+CIO-Gremium zur Einführung eines IuK-Projekts“.
 *Check:* `tests/fragen.test.mjs` und `tests/export.test.mjs` — die Hauptüberschrift der Seite und der erste Absatz von
 Word und PDF lauten genau so.
 
@@ -105,7 +105,7 @@ Die Seite des Formulars ist weniger als drei Sekunden nach Beginn des Aufrufs vo
 ### Laschen und Fortschritt
 
 **DAS FORMULAR IST AUF FÜNF LASCHEN VERTEILT** *(github.com/monicahinrichs-mayer)*
-Das Formular verteilt seine Abschnitte auf die Laschen *Allgemeines*, *Projekt*, *Recht und Sicherheit*, *Nutzung und
+Das Formular verteilt seine Abschnitte auf die Laschen *Antragsteller/in*, *Projekt*, *Recht und Sicherheit*, *Nutzung und
 Betrieb* und *Kosten*, in dieser Reihenfolge; es zeigt immer genau eine Lasche, beim Öffnen die erste.
 [→ docs/antragsfragen.md]
 *Check:* `tests/laschen.test.mjs` — jede Lasche enthält genau ihre Abschnitte aus der Tabelle, und genau eine Lasche ist
@@ -179,9 +179,17 @@ erzeugt wurde.
 **DER ANTRAG WIRD ÜBER DAS MAILPROGRAMM EINGEREICHT** *(github.com/monicahinrichs-mayer)*
 Ein Bedienelement speichert den Antrag als Word-Dokument und öffnet danach das Mailprogramm mit dem Empfänger
 `cio-office@fau.de`, dem Betreff „Antrag neues IuK-Projekt“ und einem Text, der bittet, das eben gespeicherte
-Word-Dokument anzuhängen.
+Word-Dokument und die Beilagen der Checkliste anzuhängen.
 *Check:* `tests/einreichen.test.mjs` — ein Klick auf einen vollständigen Antrag ergibt zuerst eine Datei `.docx`, dann
 eine `mailto:`-Adresse, die genau Empfänger, Betreff und Text nennt und keine Eingabe des Formulars.
+
+**NACH DEM EINREICHEN STEHT EINE CHECKLISTE DER ANHÄNGE** *(github.com/monicahinrichs-mayer)*
+Nach dem Einreichen eines vollständigen Antrags zeigt das Formular eine Checkliste dessen, was an die Mail anzuhängen
+ist: zuerst das eben gespeicherte Word-Dokument mit seinem Dateinamen, dann jede Beilage, die eine Antwort ankündigt —
+die Skizze bei P5 und die Unterlagen des Anbieters bei P6, wenn angekreuzt, die Stellungnahme bei D3 und bei R3, wenn
+„Ja, ist beigelegt“ gewählt ist. [→ docs/beilagen.md]
+*Check:* `tests/einreichen.test.mjs` — die Checkliste nennt das Word-Dokument und genau die Beilagen, deren Antwort in
+`docs/beilagen.md` steht; Gegenprobe: ohne eine solche Antwort nennt sie nur das Word-Dokument.
 
 **DAS FORMULAR NENNT, WOHIN ES SENDET** *(github.com/monicahinrichs-mayer)*
 Bevor das Mailprogramm geöffnet wird, nennt das Formular den Empfänger `cio-office@fau.de`.

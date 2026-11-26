@@ -34,6 +34,7 @@ forced_by:
   - DAS DATUM DER ANTRAGSTELLUNG IST DER TAG DES EXPORTS
   - DER ANTRAG WIRD ÜBER DAS MAILPROGRAMM EINGEREICHT
   - DAS FORMULAR NENNT, WOHIN ES SENDET
+  - NACH DEM EINREICHEN STEHT EINE CHECKLISTE DER ANHÄNGE
   - UC-001
   - UC-002
   - UC-003
@@ -63,7 +64,8 @@ Server-Code, keinen Build und keine Anfrage an einen fremden Ursprung (`KEIN SER
 
 **Der Fragenkatalog ist Daten.** Die Fragen, ihre Antwortarten und ihre Pflicht stehen einmal, in
 `docs/antragsfragen.md`, ebenso die Verteilung ihrer Abschnitte auf die fünf Laschen (je Lasche eine Überschrift
-`# Lasche: …`); die Erklärungen zu den Fragen einmal, in `docs/erklaerungen.md`. Die Seite liest beide Dateien
+`# Lasche: …`); die Erklärungen zu den Fragen einmal, in `docs/erklaerungen.md`; welche Antwort eine Beilage ankündigt,
+einmal, in `docs/beilagen.md`. Die Seite liest die drei Dateien
 beim Laden und baut das Formular daraus. Kein Programmteil wiederholt eine Frage (*Nichts doppelt*): eine geänderte
 Fassung des Antrags ist eine geänderte Tabelle, kein geänderter Code.
 
@@ -71,11 +73,11 @@ Fassung des Antrags ist eine geänderte Tabelle, kein geänderter Code.
 
 | Modul | Ordner | Verantwortung |
 |---|---|---|
-| MOD-fragenkatalog | `src/fragenkatalog/` | liest die Tabellen der Fragen und der Erklärungen und liefert Laschen, Abschnitte und Fragen |
+| MOD-fragenkatalog | `src/fragenkatalog/` | liest die Tabellen der Fragen, Erklärungen und Beilagen und liefert Laschen, Abschnitte und Fragen |
 | MOD-pruefung | `src/pruefung/` | sagt, welche Fragen gerade Pflicht sind, welche davon unbeantwortet und wie viel Prozent beantwortet |
 | MOD-zwischenstand | `src/zwischenstand/` | liest, schreibt und löscht die Antworten in `localStorage` |
 | MOD-export | `src/export/` | erzeugt aus Katalog und Antworten ein Word-Dokument oder ein PDF |
-| MOD-einreichen | `src/einreichen/` | prüft, speichert das Word-Dokument und öffnet das Mailprogramm |
+| MOD-einreichen | `src/einreichen/` | prüft, speichert das Word-Dokument, öffnet das Mailprogramm und nennt die Beilagen |
 | MOD-formular | `src/formular/` | die Seite: zeichnet das Formular, bindet die Eingaben, trägt das Erscheinungsbild der FAU |
 
 ```mermaid
@@ -86,7 +88,7 @@ flowchart TD
   stand["MOD-zwischenstand"]
   export["MOD-export"]
   einreichen["MOD-einreichen"]
-  daten[("docs/antragsfragen.md<br/>docs/erklaerungen.md")]
+  daten[("docs/antragsfragen.md<br/>docs/erklaerungen.md<br/>docs/beilagen.md")]
   ls[("localStorage<br/>Schlüssel iuk-antrag:v1")]
   libs["src/vendor/<br/>docx · jsPDF"]
   mail(["Mailprogramm"])
@@ -125,7 +127,8 @@ MOD-zwischenstand und MOD-export sind ohne Seite testbar (*Design to test*).
 - **Einreichen (UC-003).** MOD-einreichen fragt MOD-pruefung nach unbeantworteten Pflichtfragen. Sind es welche, gibt es
   sie an MOD-formular, das sie nennt, die Lasche der ersten zeigt und sie fokussiert. Sonst speichert es das
   Word-Dokument über MOD-export und
-  setzt danach `location.href` auf `mailto:cio-office@fau.de` mit festem Betreff und festem Text.
+  setzt danach `location.href` auf `mailto:cio-office@fau.de` mit festem Betreff und festem Text. Es gibt MOD-formular
+  die Beilagen, die die Antworten ankündigen, und MOD-formular zeigt sie mit dem Word-Dokument als Checkliste.
 
 ### Strategie
 
@@ -161,8 +164,8 @@ MOD-zwischenstand und MOD-export sind ohne Seite testbar (*Design to test*).
 
 - Eine neue Fassung des Antrags ändert `docs/antragsfragen.md` und `docs/erklaerungen.md`, aber keinen Code; ebenso eine
   andere Verteilung der Abschnitte auf Laschen.
-- Seit dem Wegfall der Datumsfragen heißen die bisherigen K2 und K3 nun K1 und K2. Ein Entwurf aus der Zeit davor trägt
-  seine Antworten unter den alten Nummern; er stammt nur aus Tests und wird mit *Entwurf löschen* verworfen.
+- Die allgemeinen Angaben K1 bis K3 und das Datum C6 entfallen. Antworten darauf in einem älteren Entwurf zeigt und
+  exportiert das Formular nicht mehr; *Entwurf löschen* entfernt sie mit.
 - `docs/erklaerungen.md` entsteht neu: je Frage eine Erklärung für jemanden, der zum ersten Mal einen IuK-Antrag stellt;
   sie wird wie jedes Dokument geprüft.
 - Das Logo der FAU muss als Datei bereitgestellt werden, aus den Vorlagen des Corporate Designs der FAU.

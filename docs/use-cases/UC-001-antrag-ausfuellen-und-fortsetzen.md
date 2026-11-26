@@ -45,10 +45,10 @@ wie nötig, ohne dass ein Entwurf ihren Browser verlässt.
 ## Hauptablauf
 
 1. Die Person öffnet die Seite des Formulars. Sie lädt in unter drei Sekunden, trägt FAU-Blau, das Logo der FAU und
-   den Titel „Antrag gem. §5 Abs. 4 CIO-Ordnung an das CIO-Gremium zur Einführung/Einstellung eines IuK-Projekts“. Sie
-   zeigt die erste von fünf Laschen, *Allgemeines*, und der Eingabefokus liegt im ersten Feld (K1, Einführung oder
-   Einstellung).
-2. Über den Reitern der Laschen *Allgemeines*, *Projekt*, *Recht und Sicherheit*, *Nutzung und Betrieb* und *Kosten*
+   den Titel „Antrag gem. §5 Abs. 4 CIO-Ordnung an das CIO-Gremium zur Einführung eines IuK-Projekts“. Sie
+   zeigt die erste von fünf Laschen, *Antragsteller/in*, und der Eingabefokus liegt im ersten Feld (A1 Name, Funktion,
+   Einrichtung).
+2. Über den Reitern der Laschen *Antragsteller/in*, *Projekt*, *Recht und Sicherheit*, *Nutzung und Betrieb* und *Kosten*
    steht eine Fortschrittsleiste mit dem Anteil der beantworteten Pflichtfragen in Prozent. Die gezeigte Lasche stellt
    jede ihrer Fragen in ihrer Reihenfolge, unter ihrem Abschnitt, mit ihrer Antwortart: ein Textfeld oder eine Auswahl
    ihrer Möglichkeiten; nach einem Datum fragt das Formular nicht. Neben jeder Frage steht eine eingeklappte

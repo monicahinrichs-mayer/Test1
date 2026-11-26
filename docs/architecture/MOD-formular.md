@@ -21,6 +21,7 @@ realises:
   - DIE FORTSCHRITTSLEISTE ZEIGT DEN ANTEIL DER BEANTWORTETEN PFLICHTFRAGEN
   - JEDE LASCHE ZEIGT, OB SIE VOLLSTÄNDIG IST
   - DAS FORMULAR NENNT, WOHIN ES SENDET
+  - NACH DEM EINREICHEN STEHT EINE CHECKLISTE DER ANHÄNGE
 follows:
   - ARC-001
 uses:
@@ -40,6 +41,7 @@ uses:
   - MOD-einreichen.EMPFAENGER
   - MOD-einreichen.BETREFF
   - MOD-einreichen.reicheEin
+  - MOD-einreichen.beilagen
 provides:
   - starte
 ---
@@ -74,6 +76,9 @@ FAU.
   cio-office@fau.de“. Nach einem gescheiterten Einreichen eine Liste der fehlenden Pflichtfragen mit `role="alert"`,
   jede ein Link, der die Lasche ihres Feldes zeigt und es fokussiert; die Lasche der ersten ist gezeigt und der Fokus in
   ihr. Öffnet sich kein Mailprogramm, stehen `EMPFAENGER` und `BETREFF` zum Kopieren daneben.
+- **Checkliste** — nach einem gelungenen Einreichen eine Liste mit der Überschrift „Bitte hängen Sie an die Mail an:“,
+  je Eintrag ein `<input type="checkbox">` mit Beschriftung: zuerst das Word-Dokument mit seinem Dateinamen, dann jede
+  Beilage aus `beilagen`. Die Häkchen sind nur eine Hilfe beim Anhängen; sie werden nicht gespeichert.
 
 ## Schnittstellen
 

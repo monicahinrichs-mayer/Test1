@@ -35,7 +35,7 @@ realises:
 1. Die Person wählt *Als Word exportieren*, gleich unter welcher Lasche.
 2. Der Browser erzeugt aus dem aktuellen Stand eine Datei `.docx`, ohne etwas an einen Server zu senden, und speichert
    sie. Ein Klick genügt. Die Datei beginnt mit dem Titel „Antrag gem. §5 Abs. 4 CIO-Ordnung an das CIO-Gremium zur
-   Einführung/Einstellung eines IuK-Projekts“ und nennt darunter „Datum der Antragstellung“ mit dem heutigen Tag.
+   Einführung eines IuK-Projekts“ und nennt darunter „Datum der Antragstellung“ mit dem heutigen Tag.
 3. Die Datei enthält jede Frage des Formulars in dessen Reihenfolge und unter ihrem Abschnitt, jeweils mit der
    gegebenen Antwort; bei einer Auswahl die gewählte Möglichkeit.
 
